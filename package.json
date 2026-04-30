@@ -1,0 +1,21 @@
+{
+  "name": "olic-dev",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "workspaces": [
+    "web",
+    "studio"
+  ],
+  "scripts": {
+    "dev": "bun run --filter '*' dev",
+    "build": "bun run --filter web build",
+    "studio": "bun run --filter studio dev"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}
