@@ -1,1 +1,65 @@
-import '../styles/global.css'
+---
+import "../styles/global.css";
+interface Props {
+  title: string;
+}
+const { title } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <!-- Matrix rain canvas -->
+    <canvas id="matrix"></canvas>
+    <slot />
+  </body>
+  <script>
+    /* MATRIX RAIN BACKGROUND */
+    (() => {
+      const canvas = document.getElementById("matrix");
+      const ctx = canvas?.getContext("2d");
+      let w = (canvas.width = innerWidth);
+      let h = (canvas.height = innerHeight);
+
+      const cols = Math.floor(w / 16) + 1;
+      const ypos = Array(cols).fill(0);
+
+      function matrix() {
+        ctx.fillStyle = "rgba(0,0,0,0.08)";
+        ctx.fillRect(0, 0, w, h);
+
+        ctx.fillStyle = "#0f0";
+        ctx.font = "14px monospace";
+
+        for (let i = 0; i < ypos.length; i++) {
+          const text = String.fromCharCode(33 + Math.random() * 94);
+          const x = i * 16;
+          ctx.fillText(text, x, ypos[i] * 16);
+
+          if (ypos[i] * 16 > h && Math.random() > 0.975) ypos[i] = 0;
+          ypos[i]++;
+        }
+      }
+
+      let raf;
+      function loop() {
+        matrix();
+        raf = requestAnimationFrame(loop);
+      }
+      loop();
+
+      addEventListener("resize", () => {
+        cancelAnimationFrame(raf);
+        w = canvas.width = innerWidth;
+        h = canvas.height = innerHeight;
+      });
+    })();
+  </script>
+</html>
