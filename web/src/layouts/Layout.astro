@@ -14,6 +14,22 @@ const { title } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/4.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/4.0.0/uicons-brands/css/uicons-brands.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/4.0.0/uicons-thin-straight/css/uicons-thin-straight.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/4.0.0/uicons-thin-rounded/css/uicons-thin-rounded.css"
+    />
   </head>
   <body class="relative min-h-screen overflow-hidden z-0">
     <!-- Matrix rain canvas -->
@@ -26,11 +42,57 @@ const { title } = Astro.props;
           <div class="flex flex-1"></div>
           <div
             id="burger"
-            class="w-1/4 md:w-[40px] md:h-[40px] rounded-full bg-lime-600 m-10"
+            class="w-[40px] h-[40px] rounded-full bg-lime-600 hover:bg-lime-700 mx-4 mt-8 shadow-xl cursor-pointer flex flex-col items-center justify-center align-center"
           >
+            <i class="fi fi-ts-menu-burger text-2xl text-white mt-2"></i>
           </div>
         </nav>
-        <slot />
+        <main class="w-full flex flex-1 flex-col md:flex-row">
+          <div class="w-[15%] h-full"></div>
+          <div class="flex flex-1 flex-col justify-start">
+            <slot />
+          </div>
+          <div
+            class="w-[15%] h-full p-4 flex flex-row md:flex-col justify-center items-end gap-4 text-2xl"
+          >
+            <a
+              href="https://www.linkedin.com/in/oliviercoq/"
+              class="rounded-full text-lime-600 hover:text-lime-700"
+            >
+              <i class="fi fi-brands-linkedin-circle text-5xl"></i>
+            </a>
+            <a
+              href="https://github.com/OliCDev"
+              class="rounded-full text-lime-600 hover:text-lime-700"
+            >
+              <i class="fi fi-brands-github text-5xl"></i>
+            </a>
+            <a
+              href="/blog"
+              class="rounded-full text-lime-600 hover:text-lime-700"
+            >
+              <i class="fi fi-rr-journal-alt text-4xl me-2"></i>
+            </a>
+          </div>
+        </main>
+        <footer
+          id="footer"
+          class="w-full flex flex-row justify-center align-center items-center p-4"
+        >
+          <p class="text-neutral-200">
+            Made with ❤️ by
+            <a
+              href="https://github.com/OliCDev"
+              class="text-lime-600 hover:text-lime-700"
+            >
+              Oli
+            </a>
+            with <a
+              href="https://astro.build/"
+              class="text-lime-600 hover:text-lime-700">Astro</a
+            > v6.2.0
+          </p>
+        </footer>
       </div>
     </div>
   </body>
@@ -73,6 +135,7 @@ const { title } = Astro.props;
         cancelAnimationFrame(raf);
         w = canvas.width = innerWidth;
         h = canvas.height = innerHeight;
+        loop(); // Restart the animation loop after resizing
       });
     })();
   </script>
